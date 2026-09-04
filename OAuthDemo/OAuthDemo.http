@@ -1,0 +1,6 @@
+@OAuthDemo_HostAddress = http://localhost:5043
+
+GET {{OAuthDemo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

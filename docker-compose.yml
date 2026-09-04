@@ -1,0 +1,32 @@
+services:
+  oauthdemo:
+    # image: ${DOCKER_REGISTRY-}oauthdemo
+    volumes:
+     - ./OAuthDemo:/app
+    build:
+      context: .
+      dockerfile: OAuthDemo/Dockerfile
+    ports:
+     - 5000:8080 
+     - 5001:8081
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    command: start-dev
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+
+  orderconsumer:
+    # image: ${DOCKER_REGISTRY-}orderconsumer
+    volumes:
+     - ./OrderConsumer:/app
+    ports:
+     - 6000:8080 
+     - 6001:8081
+    build:
+      context: .
+      dockerfile: OrderConsumer/Dockerfile
+
